@@ -1,0 +1,22 @@
+<a href="/products/add" class="btn btn-success btn-sm" style="margin-right: 15px;">Create</a>
+{{#if products}}
+<div class="products">
+    {{#each products}}
+    <div class="card" style="width: 18rem;">
+        <img src="{{productImg}}" class="card_img" alt="...">
+        <div class="card-body">
+            <div class="card_info">
+                <h5><a href="">{{categoriyId.categoryName}}</a></h5>
+                <h4 class="card-title">{{productName}}</h4>
+                <p class="card-text">{{aboutProduct}}</p>
+                <p class="card-price">{{price}}</p>
+            </div>
+            <a href="" class="btn btn-primary">Sotib olish</a>
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+{{else}}
+<h2>Products aren`t add</h2>
+{{/if}}

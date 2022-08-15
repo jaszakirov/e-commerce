@@ -1,0 +1,52 @@
+<div class="container-fluid">
+    <div class="row justify-content-start">
+        <div class="col-md-4">
+            <form action="/products/add" method="post">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="categoryName">Categoriy name</label>
+                        <input type="text" class="form-control" name="categoryName" id="categoryName"
+                            placeholder="Categoriy name">
+                    </div>
+                    <div class="form-group">
+                        <label for="productName">Product name</label>
+                        <input type="text" class="form-control" name="productName" id="productName"
+                            placeholder="product name">
+                    </div>
+                    <div class="form-group">
+                        <label for="categoryimg">Product image</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="text" class="form-control" id="productImg" name="productImg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoryimg">About product</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="text" class="form-control" id="aboutProduct" name="aboutProduct">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoryimg">Product price</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="text" class="form-control" id="categoryimg" name="price">
+                            </div>
+                        </div>
+                    </div>
+                    <select name="categoriyId" id="categoriyId">
+                        {{#each categories}}
+                        <option value="{{id}}"><h3>{{categoryName}}</h3></option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

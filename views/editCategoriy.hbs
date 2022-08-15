@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <div class="row justify-content-start">
+        <div class="col-md-4">
+            <form action="/categories/edit/{{categoriyId}}" method="post">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="categoryName">Category name</label>
+                        <input type="text" class="form-control" name="categoryName" id="categoryName"
+                           value="{{category.categoryName}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="categoryimg">Category image</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="text" class="form-control" id="categoryimg" name="categoryImg" value="{{category.categoryImg}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
