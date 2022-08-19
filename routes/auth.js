@@ -4,15 +4,13 @@ const {
 const router = Router()
 const Admin = require('../model/Admins')
 const bcrypt = require('bcrypt')
-
-router.get('/', async (req, res) => {
+router.get('/register', async (req, res) => {
     res.render('register', {
         title: 'register',
         layout: 'auth'
     })
 })
-router.post('/auth/register', async (req, res) => {
-    console.log(req.body.password);
+router.post('/register', async (req, res) => {
     const hashPasword = await bcrypt.hash(req.body.password , 10)
     const admin = await new Admin({
         fullName : req.body.fullName ,
@@ -23,37 +21,41 @@ router.post('/auth/register', async (req, res) => {
     admin.save()
     res.redirect('/auth/login')
 })
-router.get('/auth/login', (req, res) => {
+router.get('/login', (req, res) => {
     res.render('login', {
         title: "login",
-        layout: "auth"
+        layout: "auth" , 
+        msg : req.flash('error')
     })
 })
-router.post('/auth/login',async (req, res) => {
+router.post('/login',async (req, res) => {
     const admin = await Admin.findOne({email : req.body.email})
     if(!admin){
-       return res.status(404).send("This email  not found")
+        req.flash('error' , 'Email is not found')
+        res.redirect('/auth/login')
+        return
     }
     const compare =  await bcrypt.compare(req.body.password , admin.password)
-    if(compare){
-        res.redirect('/home')
-    }else{
-        res.status(404).send("Passwors is incorect")
+    if(!compare){
+        req.flash('error' , 'Password is incorect')
+        res.redirect('/auth/login')
         return
     }
     req.session.auth = true 
-    req.session.admin = admin
+    req.session.admin = admin  
     req.session.save((err)=>{ 
         if(err){
             throw new Error(err)
         }else{
-            res.redirect('/home')
+            res.redirect('/')
         }
     }) 
 })
-
- 
-
-
-
+router.get('/logout' , async (req , res)=>{
+    req.session.destroy((err)=>{
+        if(err) throw new Error(err)
+        res.redirect('/auth/login')
+    })
+   
+})
 module.exports = router

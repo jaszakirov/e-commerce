@@ -19,8 +19,7 @@ router.get('/add', (req, res) => {
 router.get('/:id' ,async (req,res)=>{
     const categoryId = req.params.id
     const products = await Products.find({categoriyId : categoryId }).populate('categoriyId')
-    console.log(products);
-    res.render('category' , {
+    res.render('products' , {
         products  
     }) 
 }) 
