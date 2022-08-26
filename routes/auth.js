@@ -4,19 +4,22 @@ const {
 const router = Router()
 const Admin = require('../model/Admins')
 const bcrypt = require('bcrypt')
+const multer = require('multer')
+const upload = require('../middleware/fileupload')
 router.get('/register', async (req, res) => {
     res.render('register', {
         title: 'register',
         layout: 'auth'
     })
 })
-router.post('/register', async (req, res) => {
+router.post('/register', upload.single('img')  ,  async (req, res) => {
     const hashPasword = await bcrypt.hash(req.body.password , 10)
     const admin = await new Admin({
         fullName : req.body.fullName ,
         email : req.body.email ,
         password: hashPasword,
-        img : req.body.img || " "
+        img : req.file.filename || " " ,
+        status : req.body.status 
     })
     admin.save()
     res.redirect('/auth/login')

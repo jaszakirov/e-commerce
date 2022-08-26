@@ -7,7 +7,7 @@
       <div class="card">
         <div class="card-body register-card-body">
           <p class="login-box-msg">Register a new membership</p>
-          <form action="/auth/register" method="post">
+          <form action="/auth/register" method="post" enctype="multipart/form-data">
             <div class="input-group mb-3">
               <input type="text" class="form-control" placeholder="Full name" name="fullName">
               <div class="input-group-append">
@@ -33,7 +33,15 @@
               </div>
             </div>
             <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="image" name="img">
+              <input type="file" class="form-control" placeholder="image" name="img">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="status" name="status">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-lock"></span>
